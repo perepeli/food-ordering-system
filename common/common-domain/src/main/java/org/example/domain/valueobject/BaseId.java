@@ -5,6 +5,10 @@ import java.util.Objects;
 public abstract class BaseId<T> {
     private final T value;
 
+    protected BaseId(T value) {
+        this.value = value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -22,7 +26,5 @@ public abstract class BaseId<T> {
         return value;
     }
 
-    protected BaseId(T value) {
-        this.value = value;
-    }
+
 }
