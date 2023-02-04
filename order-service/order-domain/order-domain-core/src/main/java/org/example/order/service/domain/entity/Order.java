@@ -37,22 +37,42 @@ public class Order extends AggregateRoot<OrderId> {
 
     public void pay() {
         if (orderStatus != OrderStatus.PENDING) {
-            throw new DomainException("Order is not in a correct state for pay operation");
+            throw new DomainException("Order is not in a correct state for pay() operation");
         }
         orderStatus = OrderStatus.PAID;
     }
 
-    private void approve() {
-        if(orderStatus != OrderStatus.PAID) {
-            throw  new DomainException("Order is not in a correct state for approve operation");
+    public void initCancel(List<String> failureMessages) {
+        if (orderStatus != OrderStatus.PAID) {
+            throw new OrderDomainException("Order is not in a correct state for initCancel() operation");
         }
-        orderStatus = OrderStatus.APPROVED;
+        orderStatus = OrderStatus.CANCELLING;
+        updateFailureMessages(failureMessages);
     }
 
-    private void initCancel() {
-        if(orderStatus != OrderStatus.PAID) {
-            throw  new DomainException("Order is not in a correct state for cancel operation");
+    public void cancel(List<String> failureMessages) {
+        if (!(orderStatus == OrderStatus.PAID ||  orderStatus == OrderStatus.CANCELLING)) {
+            throw new OrderDomainException("Order is not in a correct state for cancel() operation");
         }
+        orderStatus = OrderStatus.CANCELLED;
+        updateFailureMessages(failureMessages);
+    }
+
+    private void updateFailureMessages(List<String> failureMessages) {
+        if (this.failureMessages != null && failureMessages != null) {
+            this.failureMessages.addAll(failureMessages.stream().filter(message -> !message.isEmpty()).toList());
+        }
+
+        if (this.failureMessages == null) {
+            this.failureMessages = failureMessages;
+        }
+    }
+
+    private void approve() {
+        if(orderStatus != OrderStatus.PAID) {
+            throw  new DomainException("Order is not in a correct state for approve() operation");
+        }
+        orderStatus = OrderStatus.APPROVED;
     }
 
     private void validateItemsPrice() {
