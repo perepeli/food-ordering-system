@@ -1,4 +1,4 @@
 package org.example.domain.event;
 
-public class DomainEvent<T> {
+public interface DomainEvent<T> {
 }
