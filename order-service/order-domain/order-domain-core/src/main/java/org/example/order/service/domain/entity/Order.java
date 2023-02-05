@@ -68,7 +68,7 @@ public class Order extends AggregateRoot<OrderId> {
         }
     }
 
-    private void approve() {
+    public void approve() {
         if(orderStatus != OrderStatus.PAID) {
             throw  new DomainException("Order is not in a correct state for approve() operation");
         }
