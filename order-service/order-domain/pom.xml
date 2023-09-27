@@ -10,9 +10,13 @@
     </parent>
 
     <artifactId>order-domain</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>order-domain-core</module>
+        <module>order-application-service</module>
+    </modules>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 </project>

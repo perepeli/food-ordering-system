@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.food.ordering.system</groupId>
-        <artifactId>order-service</artifactId>
+        <artifactId>order-domain</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>order-dataaccess</artifactId>
+    <artifactId>order-application-service</artifactId>
 
     <properties>
     </properties>
@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>com.food.ordering.system</groupId>
-            <artifactId>order-application-service</artifactId>
+            <artifactId>order-domain-core</artifactId>
         </dependency>
     </dependencies>
 
