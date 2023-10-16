@@ -1,2 +1,6 @@
-package com.food.ordering.system.domain.entity;public class Customer {
+package com.food.ordering.system.domain.entity;
+
+import com.food.ordering.system.domain.valueobject.CustomerId;
+
+public class Customer extends AggregateRoot<CustomerId> {
 }
